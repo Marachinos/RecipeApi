@@ -61,7 +61,7 @@ dotnet run --project RecipeApi
 Navigera till:
 
 https://localhost:7228/swagger/index.html
-
+http://localhost:5129/swagger
 Där kan du testa alla endpoints direkt.
 
 🧪 Hur man kör tester
