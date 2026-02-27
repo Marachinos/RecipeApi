@@ -6,10 +6,10 @@ namespace RecipeApi.Models.DTOs
     {
         [Required]
         [StringLength(100, MinimumLength = 3)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(500)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Range(1, 480)]
         public int PrepTimeMinutes { get; set; }
@@ -21,14 +21,17 @@ namespace RecipeApi.Models.DTOs
         public int Servings { get; set; }
 
         [Required]
-        public List<CreateIngredientDto> Ingredients { get; set; }
+        [AllowedValues("Easy", "Medium", "Hard")]
+        public string Difficulty { get; set; } = string.Empty;
 
         [Required]
         [MinLength(1)]
-        public List<string> Instructions { get; set; }
-    }
+        public List<CreateIngredientDto> Ingredients { get; set; } = [];
 
-    public class CreateIngredientDto
-    {
+        [Required]
+        [MinLength(1)]
+        public List<string> Instructions { get; set; } = [];
+
+
     }
 }
