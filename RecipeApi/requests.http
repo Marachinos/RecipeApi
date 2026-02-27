@@ -1,5 +1,5 @@
 ﻿### Create Recipe
-POST https://localhost:5001/api/recipes
+POST https://localhost:7228/api/recipes
 Content-Type: application/json
 
 {
@@ -19,6 +19,32 @@ Content-Type: application/json
 }
 
 ###
+PUT https://localhost:7228/api/recipes/3
+Content-Type: application/json
+
+{
+  "name": "Pannkakor",
+  "description": "Klassiska svenska pannkakor",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 20,
+  "servings": 4,
+  "difficulty": "Easy",
+  "ingredients": [
+    { "name": "Mjöl", "quantity": 3, "unit": "dl" }
+  ],
+  "instructions": [
+    "Blanda",
+    "Stek"
+  ]
+}
+
+
+###
 
 ### Get All
-GET https https://localhost:7228/swagger/index.html
+GET  https://localhost:7228/api/recipes
+
+### Delete by id
+DELETE https://localhost:7228/api/recipes/2
+
+
