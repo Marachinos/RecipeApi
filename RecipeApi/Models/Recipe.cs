@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace RecipeApi.Models
 
 {
@@ -15,5 +16,6 @@ namespace RecipeApi.Models
         public List<Ingredient> Ingredients { get; set; }
         public List<string> Instructions { get; set; }
         public DateTime CreatedAt { get; set; }
+        public IAsyncEnumerable<object>? TotalTimeMinutes { get; set; }
     }
 }
