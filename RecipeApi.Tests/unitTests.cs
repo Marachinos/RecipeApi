@@ -1,6 +1,6 @@
 ﻿namespace RecipeApi.Tests;
 
-public class UnitTest1
+public class programcs
 {
     [Fact]
     public void Test1()
