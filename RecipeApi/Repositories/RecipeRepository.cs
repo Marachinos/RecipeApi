@@ -1,11 +1,7 @@
 ﻿using RecipeApi.Models;
-using RecipeApi.Repositories;
-using RecipeApi.Models.DTOs;
 
 namespace RecipeApi.Repositories;
 
-
-// En enkel in-memory repository. I en riktig applikation skulle vi använda en databas, t.ex. via Entity Framework Core.
 public class RecipeRepository : IRecipeRepository
 {
     private readonly List<Recipe> _recipes = new();
@@ -13,17 +9,14 @@ public class RecipeRepository : IRecipeRepository
     private int _nextIngredientId = 1;
     private readonly object _lock = new();
 
-    // För enkelhetens skull hanterar vi ID
     public Task<List<Recipe>> GetAllAsync()
     {
         lock (_lock)
         {
-            // Returnera kopia så ingen kan ändra listan utifrån
             return Task.FromResult(_recipes.Select(CloneRecipe).ToList());
         }
     }
 
-    // Hitta receptet med rätt ID, eller returnera null
     public Task<Recipe?> GetByIdAsync(int id)
     {
         lock (_lock)
@@ -33,7 +26,6 @@ public class RecipeRepository : IRecipeRepository
         }
     }
 
-    // 
     public Task<Recipe> CreateAsync(Recipe recipe)
     {
         lock (_lock)
@@ -49,20 +41,18 @@ public class RecipeRepository : IRecipeRepository
             }
 
             _recipes.Add(toStore);
-
             return Task.FromResult(CloneRecipe(toStore));
         }
     }
 
-    // Uppdatera ett befintligt recept. Behåll CreatedAt och hantera nya ingredienser
     public Task<bool> UpdateAsync(Recipe recipe)
     {
         lock (_lock)
         {
-            var existingIndex = _recipes.FindIndex(r => r.Id == recipe.Id);
-            if (existingIndex < 0) return Task.FromResult(false);
+            var index = _recipes.FindIndex(r => r.Id == recipe.Id);
+            if (index < 0) return Task.FromResult(false);
 
-            var existing = _recipes[existingIndex];
+            var existing = _recipes[index];
 
             var updated = CloneRecipe(recipe);
             updated.CreatedAt = existing.CreatedAt; // behåll CreatedAt
@@ -72,12 +62,11 @@ public class RecipeRepository : IRecipeRepository
                 if (ing.Id == 0) ing.Id = _nextIngredientId++;
             }
 
-            _recipes[existingIndex] = updated;
+            _recipes[index] = updated;
             return Task.FromResult(true);
         }
     }
 
-    // Ta bort ett recept baserat på ID. Returnera true om det togs bort, false om det inte fanns
     public Task<bool> DeleteAsync(int id)
     {
         lock (_lock)
@@ -87,7 +76,6 @@ public class RecipeRepository : IRecipeRepository
         }
     }
 
-    // En hjälpfunktion för att klona ett recept så att vi inte exponerar interna referenser
     private static Recipe CloneRecipe(Recipe r)
     {
         return new Recipe
