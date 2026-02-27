@@ -1,4 +1,6 @@
-﻿namespace RecipeApi.Services
+﻿using RecipeApi.Models;
+
+namespace RecipeApi.Services
     {
         public interface IRecipeService
         {
