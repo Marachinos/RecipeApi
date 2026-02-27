@@ -1,4 +1,6 @@
 ﻿using RecipeApi.Models;
+using RecipeApi.Models.DTOs;
+
 
 namespace RecipeApi.Services
     {

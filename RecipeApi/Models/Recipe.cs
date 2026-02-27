@@ -1,4 +1,7 @@
-﻿namespace RecipeApi.Models
+﻿
+
+namespace RecipeApi.Models
+
 {
     public class Recipe
     {
