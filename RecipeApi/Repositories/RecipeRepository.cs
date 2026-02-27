@@ -1,4 +1,6 @@
 ﻿using RecipeApi.Models;
+using RecipeApi.Repositories;
+using RecipeApi.Models.DTOs;
 
 namespace RecipeApi.Repositories;
 

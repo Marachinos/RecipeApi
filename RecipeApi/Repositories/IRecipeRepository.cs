@@ -1,9 +1,9 @@
 ﻿using RecipeApi.Models;
 using RecipeApi.Models.DTOs;
 
-namespace RecipeApi.Services;
+namespace RecipeApi.Repositories;
 
-public interface IRecipeService
+public interface IRecipeRepository
 {
     // Här kan vi lägga till mer affärslogik, t.ex. validering, innan vi anropar repository
     Task<List<Recipe>> GetAllAsync();
