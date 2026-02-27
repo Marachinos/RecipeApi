@@ -1,24 +1,40 @@
-🍳 Recipe API – Web API & Enhetstester
-📌 Beskrivning
+# 🍳 Recipe API
 
-Detta projekt är ett RESTful Web API byggt med ASP.NET Core för att hantera matrecept.
-API:et stödjer fullständiga CRUD-operationer samt sökning och filtrering.
+A RESTful Web API built with ASP.NET Core for managing cooking recipes with full CRUD operations, search functionality, and difficulty filtering.
 
-Projektet är uppbyggt enligt lagerarkitektur med:
+## 📋 Table of Contents
 
-Controllers (HTTP-logik)
+- [About](#about)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Technologies](#technologies)
+- [Getting Started](#getting-started)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Authors](#authors)
 
-Services (affärslogik)
+## 🎯 About
 
-Repositories (dataåtkomst)
+This project is a modern Recipe Management API that demonstrates clean architecture principles, dependency injection, and comprehensive testing practices. Built with .NET 10, it provides a robust foundation for managing recipes with ingredients, cooking instructions, and difficulty levels.
 
-DTOs med validering
+## ✨ Features
 
-Dependency Injection
+- ✅ Full CRUD operations for recipes
+- 🔍 Search recipes by name or description
+- 🎚️ Filter recipes by difficulty level (Easy, Medium, Hard)
+- ✔️ Comprehensive input validation using Data Annotations
+- 📝 Swagger/OpenAPI documentation
+- 🧪 Unit tests with xUnit and Moq
+- 🏗️ Clean layered architecture
+- 💉 Dependency Injection throughout
+- ⚡ Async/await patterns for optimal performance
 
-Enhetstester med xUnit och Moq
+## 🏗️ Architecture
 
-🏗️ Arkitektur
+The project follows a clean layered architecture with clear separation of concerns:
+
+````````markdown
 RecipeApi/
 ├── Controllers/
 ├── Services/
@@ -28,189 +44,121 @@ RecipeApi/
 └── Program.cs
 
 RecipeApi.Tests/
-Lageransvar
-Lager	Ansvar
-Controller	Hanterar HTTP-anrop och statuskoder
-Service	Innehåller affärslogik (Search, Difficulty, validering)
-Repository	Hanterar data (in-memory lagring)
-DTO	Validering via DataAnnotations
-🚀 Tekniker
+````````
 
-.NET 8
+## 🚀 Technologies
 
-ASP.NET Core Web API
+The project is built using the following technologies:
 
-Swagger / OpenAPI
+- **.NET 10**: The latest version of .NET for building cross-platform applications.
+- **ASP.NET Core Web API**: Framework for building HTTP services.
+- **Swagger / OpenAPI**: For API documentation and testing.
+- **xUnit**: A testing tool for .NET.
+- **Moq**: A mocking library for .NET.
+- **Dependency Injection**: For achieving Inversion of Control (IoC).
+- **Async/Await**: For asynchronous programming.
 
-xUnit
+## ▶️ Getting Started
 
-Moq
+To run the project locally, follow these steps:
 
-Dependency Injection
+1. **Clone the repository**
+   ```bash
+   git clone <your-github-link>
+   cd RecipeApi
+   ```
 
-Async/Await
+2. **Run the API project**
+   ```bash
+   dotnet run --project RecipeApi
+   ```
 
-▶️ Hur man kör projektet
-1️⃣ Klona repository
-git clone <din-github-länk>
-cd RecipeApi
-2️⃣ Kör API-projektet
-dotnet run --project RecipeApi
-3️⃣ Öppna Swagger
+3. **Open Swagger**
+   Navigate to:
+   - `https://localhost:7228/swagger/index.html`
+   - `http://localhost:5129/swagger`
+   
+   Here you can test all endpoints directly.
 
-Navigera till:
+## 📡 API Endpoints
 
-https://localhost:7228/swagger/index.html
-http://localhost:5129/swagger
-Där kan du testa alla endpoints direkt.
+The API provides the following endpoints:
 
-🧪 Hur man kör tester
+- **Get all recipes**
+  - `GET /api/recipes`
+  
+- **Get recipe by ID**
+  - `GET /api/recipes/{id}`
+  
+- **Search recipes**
+  - `GET /api/recipes/search?q={term}`
+  
+- **Filter by difficulty level**
+  - `GET /api/recipes/difficulty/{level}`
+    - Allowed values: Easy, Medium, Hard
 
-Gå till solution-mappen och kör:
+- **Create a new recipe**
+  - `POST /api/recipes`
+  - Example request body:
+    ```json
+    {
+      "name": "Pancakes",
+      "description": "Classic Swedish pancakes",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "servings": 4,
+      "difficulty": "Easy",
+      "ingredients": [
+        { "name": "Flour", "quantity": 3, "unit": "dl" }
+      ],
+      "instructions": [
+        "Mix ingredients",
+        "Cook in a pan"
+      ]
+    }
+    ```
+  - Expected response:
+    - `201 Created`
+    - `Location: /api/recipes/{id}`
 
+- **Update a recipe**
+  - `PUT /api/recipes/{id}`
+  - Expected responses:
+    - `204 No Content`
+    - `404 Not Found`
+
+- **Delete a recipe**
+  - `DELETE /api/recipes/{id}`
+  - Expected responses:
+    - `204 No Content`
+    - `404 Not Found`
+
+## 🧪 Testing
+
+The project includes unit tests for both the service and controller layers.
+
+- **Service Tests**: Validate business logic, mocking repositories with Moq.
+- **Controller Tests**: Validate HTTP response codes and integration with services.
+
+To run the tests, navigate to the solution folder and execute:
+
+```bash
 dotnet test
+```
 
-Alla tester ska passera.
+All tests should pass.
 
-📡 API Endpoints
-🔹 Hämta alla recept
-GET /api/recipes
-🔹 Hämta recept via ID
-GET /api/recipes/{id}
-🔹 Sök recept
-GET /api/recipes/search?q={term}
-🔹 Filtrera på svårighetsgrad
-GET /api/recipes/difficulty/{level}
+## 📂 Project Structure
 
-Tillåtna värden:
+The project is organized into the following key directories:
 
-Easy
+- **Controllers**: Handle HTTP requests and responses.
+- **Services**: Contain business logic and application rules.
+- **Repositories**: Manage data access and persistence.
+- **Models**: Define data structures and DTOs.
 
-Medium
+## 📬 Authors
 
-Hard
+This project was developed as a laboratory exercise in the course **Web API & Unit Testing**, through pair programming.
 
-🔹 Skapa nytt recept
-POST /api/recipes
-
-Exempel:
-
-{
-  "name": "Pannkakor",
-  "description": "Klassiska svenska pannkakor",
-  "prepTimeMinutes": 10,
-  "cookTimeMinutes": 20,
-  "servings": 4,
-  "difficulty": "Easy",
-  "ingredients": [
-    { "name": "Mjöl", "quantity": 3, "unit": "dl" }
-  ],
-  "instructions": [
-    "Blanda ingredienser",
-    "Stek i panna"
-  ]
-}
-
-Svar:
-
-201 Created
-Location: /api/recipes/{id}
-🔹 Uppdatera recept
-PUT /api/recipes/{id}
-
-Returnerar:
-
-204 NoContent
-
-404 NotFound
-
-🔹 Ta bort recept
-DELETE /api/recipes/{id}
-
-Returnerar:
-
-204 NoContent
-
-404 NotFound
-
-✅ Validering
-
-Validering sker via DataAnnotations i DTO-klasser:
-
-Name: Required, min 3 tecken
-
-PrepTimeMinutes: 1–480
-
-CookTimeMinutes: 0–480
-
-Servings: 1–100
-
-Ingredients: minst 1
-
-Instructions: minst 1
-
-Difficulty: Easy / Medium / Hard
-
-Vid ogiltig data returnerar API:
-
-400 Bad Request
-🧪 Enhetstester
-Service-tester
-
-Testar:
-
-GetAll
-
-GetById (existerande)
-
-GetById (saknas)
-
-Create
-
-Search
-
-Repository mockas med Moq.
-
-Controller-tester
-
-Testar:
-
-GetAll → 200 OK
-
-GetById → 404
-
-Create → 201 Created
-
-Service mockas i controllertester.
-
-📌 Designbeslut
-
-In-memory repository används istället för databas.
-
-Repository innehåller endast CRUD (dataåtkomst).
-
-Service innehåller affärslogik (Search, Difficulty-filter).
-
-Async/await används genomgående.
-
-Dependency Injection konfigureras i Program.cs.
-
-🏆 Bedömning
-Uppfyller Godkänt (G)
-
-Alla endpoints implementerade
-
-Lagerarkitektur korrekt
-
-Validering implementerad
-
-Minst 8 enhetstester
-
-Dependency Injection används korrekt
-
-📬 Författare
-
-Laboration i kursen Web API & Enhetstester.
-Utvecklat med parprogrammering.
-
-Av Aygen, Marika, Sandra &Tsoler
+Contributors: **Aygen, Marika, Sandra & Tsoler**
